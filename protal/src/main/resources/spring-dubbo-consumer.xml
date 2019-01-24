@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+    <context:component-scan base-package="com"/>
+    <!--加载资源文件  -->
+    <context:property-placeholder location="classpath:res/*.properties"/>
+    <!--使用者名称-->
+    <dubbo:application name="hospital-consumer"></dubbo:application>
+    <!--注册中心地址-->
+    <dubbo:registry protocol="dubbo" address="zookeeper://120.79.32.91:2181"></dubbo:registry>
+    <!--从dubbo中引用原来有rest提供的服务，交由sprin管理   -->
+    <dubbo:reference id="hello" interface="com.hospital.interfaces.TestHello"/>
+</beans>
