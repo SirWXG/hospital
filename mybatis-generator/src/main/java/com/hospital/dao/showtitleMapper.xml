@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hospital.mapper.showtitleMapper" >
+  <resultMap id="BaseResultMap" type="com.hospital.pojo.showtitle" >
+    <constructor >
+      <idArg column="title_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="title_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hospital.pojo.showtitle" >
+    <constructor >
+      <idArg column="title_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="title_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="show_info" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    title_id, title, title_url
+  </sql>
+  <sql id="Blob_Column_List" >
+    show_info
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from showtitle
+    where title_id = #{titleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from showtitle
+    where title_id = #{titleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hospital.pojo.showtitle" >
+    insert into showtitle (title_id, title, title_url, 
+      show_info)
+    values (#{titleId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{titleUrl,jdbcType=VARCHAR}, 
+      #{showInfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hospital.pojo.showtitle" >
+    insert into showtitle
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="titleId != null" >
+        title_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="titleUrl != null" >
+        title_url,
+      </if>
+      <if test="showInfo != null" >
+        show_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="titleId != null" >
+        #{titleId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="titleUrl != null" >
+        #{titleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="showInfo != null" >
+        #{showInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hospital.pojo.showtitle" >
+    update showtitle
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="titleUrl != null" >
+        title_url = #{titleUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="showInfo != null" >
+        show_info = #{showInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where title_id = #{titleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hospital.pojo.showtitle" >
+    update showtitle
+    set title = #{title,jdbcType=VARCHAR},
+      title_url = #{titleUrl,jdbcType=VARCHAR},
+      show_info = #{showInfo,jdbcType=LONGVARCHAR}
+    where title_id = #{titleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hospital.pojo.showtitle" >
+    update showtitle
+    set title = #{title,jdbcType=VARCHAR},
+      title_url = #{titleUrl,jdbcType=VARCHAR}
+    where title_id = #{titleId,jdbcType=VARCHAR}
+  </update>
+</mapper>
