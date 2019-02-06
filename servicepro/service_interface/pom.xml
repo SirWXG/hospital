@@ -11,5 +11,13 @@
 
     <artifactId>service_interface</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.hospital</groupId>
+            <artifactId>pojo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 
 </project>

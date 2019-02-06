@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hospital.dao.patientsMapper" >
+  <resultMap id="BaseResultMap" type="com.hospital.pojo.patients" >
+    <constructor >
+      <idArg column="patient_identity" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column=" patient_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="patient_sex" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="patient_empid" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    patient_identity, " patient_name", patient_sex, patient_empid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from patients
+    where patient_identity = #{patientIdentity,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from patients
+    where patient_identity = #{patientIdentity,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hospital.pojo.patients" >
+    insert into patients (patient_identity, " patient_name", patient_sex, 
+      patient_empid)
+    values (#{patientIdentity,jdbcType=VARCHAR}, #{patientName,jdbcType=VARCHAR}, #{patientSex,jdbcType=VARCHAR}, 
+      #{patientEmpid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hospital.pojo.patients" >
+    insert into patients
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="patientIdentity != null" >
+        patient_identity,
+      </if>
+      <if test="patientName != null" >
+        " patient_name",
+      </if>
+      <if test="patientSex != null" >
+        patient_sex,
+      </if>
+      <if test="patientEmpid != null" >
+        patient_empid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="patientIdentity != null" >
+        #{patientIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="patientName != null" >
+        #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientSex != null" >
+        #{patientSex,jdbcType=VARCHAR},
+      </if>
+      <if test="patientEmpid != null" >
+        #{patientEmpid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hospital.pojo.patients" >
+    update patients
+    <set >
+      <if test="patientName != null" >
+        " patient_name" = #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientSex != null" >
+        patient_sex = #{patientSex,jdbcType=VARCHAR},
+      </if>
+      <if test="patientEmpid != null" >
+        patient_empid = #{patientEmpid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where patient_identity = #{patientIdentity,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hospital.pojo.patients" >
+    update patients
+    set " patient_name" = #{patientName,jdbcType=VARCHAR},
+      patient_sex = #{patientSex,jdbcType=VARCHAR},
+      patient_empid = #{patientEmpid,jdbcType=VARCHAR}
+    where patient_identity = #{patientIdentity,jdbcType=VARCHAR}
+  </update>
+</mapper>

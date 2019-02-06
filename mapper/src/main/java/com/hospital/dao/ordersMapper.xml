@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hospital.dao.ordersMapper" >
+  <resultMap id="BaseResultMap" type="com.hospital.pojo.orders" >
+    <constructor >
+      <idArg column="orsder_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="order_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="patient_age" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="order_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="order_deptid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="emp_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="order_info" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="order_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="order_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    orsder_id, order_name, patient_age, order_phone, order_deptid, emp_id, order_info, 
+    order_date, order_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where orsder_id = #{orsderId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from orders
+    where orsder_id = #{orsderId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hospital.pojo.orders" >
+    insert into orders (orsder_id, order_name, patient_age, 
+      order_phone, order_deptid, emp_id, 
+      order_info, order_date, order_status
+      )
+    values (#{orsderId,jdbcType=VARCHAR}, #{orderName,jdbcType=VARCHAR}, #{patientAge,jdbcType=VARCHAR}, 
+      #{orderPhone,jdbcType=VARCHAR}, #{orderDeptid,jdbcType=INTEGER}, #{empId,jdbcType=VARCHAR}, 
+      #{orderInfo,jdbcType=VARCHAR}, #{orderDate,jdbcType=TIMESTAMP}, #{orderStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hospital.pojo.orders" >
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orsderId != null" >
+        orsder_id,
+      </if>
+      <if test="orderName != null" >
+        order_name,
+      </if>
+      <if test="patientAge != null" >
+        patient_age,
+      </if>
+      <if test="orderPhone != null" >
+        order_phone,
+      </if>
+      <if test="orderDeptid != null" >
+        order_deptid,
+      </if>
+      <if test="empId != null" >
+        emp_id,
+      </if>
+      <if test="orderInfo != null" >
+        order_info,
+      </if>
+      <if test="orderDate != null" >
+        order_date,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orsderId != null" >
+        #{orsderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderName != null" >
+        #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientAge != null" >
+        #{patientAge,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPhone != null" >
+        #{orderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDeptid != null" >
+        #{orderDeptid,jdbcType=INTEGER},
+      </if>
+      <if test="empId != null" >
+        #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderInfo != null" >
+        #{orderInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null" >
+        #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hospital.pojo.orders" >
+    update orders
+    <set >
+      <if test="orderName != null" >
+        order_name = #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientAge != null" >
+        patient_age = #{patientAge,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPhone != null" >
+        order_phone = #{orderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDeptid != null" >
+        order_deptid = #{orderDeptid,jdbcType=INTEGER},
+      </if>
+      <if test="empId != null" >
+        emp_id = #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderInfo != null" >
+        order_info = #{orderInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null" >
+        order_date = #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where orsder_id = #{orsderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hospital.pojo.orders" >
+    update orders
+    set order_name = #{orderName,jdbcType=VARCHAR},
+      patient_age = #{patientAge,jdbcType=VARCHAR},
+      order_phone = #{orderPhone,jdbcType=VARCHAR},
+      order_deptid = #{orderDeptid,jdbcType=INTEGER},
+      emp_id = #{empId,jdbcType=VARCHAR},
+      order_info = #{orderInfo,jdbcType=VARCHAR},
+      order_date = #{orderDate,jdbcType=TIMESTAMP},
+      order_status = #{orderStatus,jdbcType=INTEGER}
+    where orsder_id = #{orsderId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -12,14 +12,15 @@
     <context:component-scan base-package="com.hospital.provide"/>
 
     <!--提供者名称-->
-    <dubbo:application name="hospital_provider"></dubbo:application>
+    <dubbo:application name="hospital_provider" />
 
     <!--注册中心-->
-   <dubbo:registry address="zookeeper://120.79.32.91:2181" timeout="3000"></dubbo:registry>
+   <dubbo:registry address="zookeeper://120.79.32.91:2181" />
     <!--协议-->
-    <dubbo:protocol name="dubbo" port="20880"></dubbo:protocol>
+    <dubbo:protocol name="dubbo" port="28080"/>
     <!-- 对外暴露的服务接口 -->
 
     <!--测试服务 ref为实现类首字母小写-->
-    <dubbo:service interface="com.hospital.interfaces.TestHello" ref="testProvide"></dubbo:service>
+    <dubbo:service interface="com.hospital.interfaces.TestHello" ref="testProvide" />
+    <dubbo:service interface="com.hospital.interfaces.DeptService" ref="deptServiceImpl" />
 </beans>
